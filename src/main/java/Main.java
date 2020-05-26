@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
+
         List<String> rules = new ArrayList<>();
         rules.add("Nie można przekraczać lini na arenie");
         Team t1 = new Team("Morsy","Niebieski");

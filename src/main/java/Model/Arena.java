@@ -2,16 +2,18 @@ package Model;
 
 import Helper.Address;
 import Helper.ArenaType;
-
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-
+@Entity
 public class  Arena { // overlapping) – spłaszczenie hierarchii
-    private List<Rent> rents = new ArrayList<>();
     private String name;
     private Address adres;
+    @Id
+    @GeneratedValue
+    private Long idArena;
     private int capacity;
     private int length;
     private int width;
@@ -20,10 +22,16 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
     private int minCapacity = 20;
     private int customObstacles = 0;
     private boolean isExperienceReq;
-    private List<String> requiredObstacles = new ArrayList<>();
 
+    @ElementCollection
+    private List<String> requiredObstacles = new ArrayList<>();
+    @OneToMany
+    private List<Rent> rents = new ArrayList<>();
+    @ElementCollection
     private EnumSet<ArenaType> arenaTypes = EnumSet.of(ArenaType.ARENA);
 
+    public Arena() {
+    }
 
     public Arena(String name, Address adres, int capacity, int length, int width, boolean isExperienceReq) {
         this.name = name;
@@ -136,7 +144,13 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
     public void setArenaTypes(EnumSet<ArenaType> arenaTypes) {
         this.arenaTypes = arenaTypes;
     }
+    public List<String> getRequiredObstacles() {
+        return requiredObstacles;
+    }
 
+    public void setRequiredObstacles(List<String> requiredObstacles) {
+        this.requiredObstacles = requiredObstacles;
+    }
     @Override
     public String toString() {
         StringBuilder info = new StringBuilder("Arena: " + "\n");

@@ -2,13 +2,21 @@ package Model;
 
 import Helper.SocialStatus;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Client extends Person {
    // private Rent rent; // asocjacja kwalifikowana
-    private List<Rent> rents = new ArrayList<>(); // asocjacja z atrubutem
 
+    @Id
+    @GeneratedValue
+    private Long clientId;
+    @OneToMany
+    private List<Rent> rents = new ArrayList<>(); // asocjacja z atrubutem
     String clientCode;
 
     public Client() {
