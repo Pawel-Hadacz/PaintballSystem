@@ -1,0 +1,70 @@
+   Player player = new Player("6545645646","Tomasz",22,"Mężczyzna",5, Experience.AMATEUR);
+        Player player2 = new Player("99999999999","Marian",22,"Mężczyzna",55, Experience.INTERMEDIATE);
+        Marker marker1 = new Marker("Axel",22,50);
+        Marker marker2 = new Marker("Witsel",11,35);
+        Marker marker3 = new Marker("Mono",4,20);
+        Marker marker4 = new Marker("Rabit",2,100);
+
+
+        player.addMarker(marker1);// przykład użycia asocjacji binarnej
+        player.addMarker(marker2);//
+        player.addMarker(marker3); //
+        System.out.println(marker1);
+        marker1.setPlayer(player2);
+        System.out.println(marker1);
+        System.out.println(player);
+        System.out.println(player2);
+
+        Rent rent = new Rent(LocalDate.of(2020,10,22),LocalDate.of(2020,12,22));
+        Rent rent2 = new Rent(LocalDate.of(2020,8,10),LocalDate.of(2020,12,10));
+
+        Arena arena = new Arena("Trawiasta", 444,100,105);
+        Arena arena2 = new Arena("Ziemista", 140,110,105);
+        Arena arena3 = new Arena("Wodna", 350,105,145);
+
+        Client client = new Client("23123131","Krzysztof",31,"M","484654LM");
+        Client client2 = new Client("5232424","Olaf",21,"M","499954LM");
+        Client client3 = new Client("489494231","Karolina",26,"K","747154LK");
+
+        System.out.println("asocjcja z atrubutem");
+        client.addRent(rent); // asocjacja z atrubutem
+        client2.addRent(rent2);
+
+        arena.addRent(rent);
+        arena2.addRent(rent2);
+        System.out.println(rent);
+
+        System.out.println(client);
+        System.out.println(arena);
+        System.out.println(client2);
+        System.out.println(arena2);
+
+//        rent.addClient(client);// Asocjacja z atrybutem
+//        rent.addClient(client2);
+//        rent.addClient(client3);
+//        rent.addArena(arena);
+//        rent.addArena(arena2);
+
+      //  System.out.println(rent);
+         // Asocjacja kwalifikowana
+        Match match4 = new Match("Czerwoni vs Czarni",22,"Wrocław");
+        Player player3 = new Player("546486468","Ola",41,"Kobieta",60, Experience.INTERMEDIATE);
+        player3.addMatchQualificator(match4);
+
+        System.out.println("asocjcja kwalifkowana");
+        System.out.println(player3.getMatchQualificator());
+
+
+        //  Kompozycja
+        Match match1 = new Match("Czerwoni vs Biali",12,"Warszawa"); // tworzenie meczów
+        Match match2 = new Match("Czerwoni vs Niebiescy",15,"Poznań");
+        Match match3 = new Match("Czerwoni vs Czarni",15,"Poznań");
+
+
+        Foul f1 = new Foul(match3,"Niedozowlona broń", "mało ważny",7); // tworzenie faulu w meczu 3
+
+        System.out.println(f1);
+        match2.addFoul(f1);
+        System.out.println(match3);
+        match1.addFoul(Foul.createFoul(match1,"Niedozwolona broń","Bardzo ważny",4));
+        match1.addFoul(Foul.createFoul(match2,"Niedozwolona amunicja","Mało ważny",8)); // nie można wspołdzielić
