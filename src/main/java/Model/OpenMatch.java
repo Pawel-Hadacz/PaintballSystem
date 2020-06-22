@@ -1,5 +1,8 @@
 package Model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class OpenMatch extends Match {
     private int maxDurationTime;
     private int maxPlayerAmount;

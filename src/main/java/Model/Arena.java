@@ -6,11 +6,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class  Arena { // overlapping) – spłaszczenie hierarchii
     private String name;
-    private Address adres;
+    private Address address;
     @Id
     @GeneratedValue
     private Long idArena;
@@ -27,15 +28,16 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
     private List<String> requiredObstacles = new ArrayList<>();
     @OneToMany
     private List<Rent> rents = new ArrayList<>();
+
     @ElementCollection
-    private EnumSet<ArenaType> arenaTypes = EnumSet.of(ArenaType.ARENA);
+    private Set<ArenaType> arenaTypes = EnumSet.of(ArenaType.ARENA);
 
     public Arena() {
     }
 
-    public Arena(String name, Address adres, int capacity, int length, int width, boolean isExperienceReq) {
+    public Arena(String name, Address address, int capacity, int length, int width, boolean isExperienceReq) {
         this.name = name;
-        this.adres = adres;
+        this.address = address;
         this.capacity = capacity;
         this.length = length;
         this.width = width;
@@ -64,12 +66,12 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
         this.name = name;
     }
 
-    public Address getAdres() {
-        return adres;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdres(Address adres) {
-        this.adres = adres;
+    public void setAddress(Address adres) {
+        this.address = address;
     }
 
     public int getCapacity() {
@@ -137,7 +139,7 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
         isExperienceReq = experienceReq;
     }
 
-    public EnumSet<ArenaType> getArenaTypes() {
+    public Set<ArenaType> getArenaTypes() {
         return arenaTypes;
     }
 

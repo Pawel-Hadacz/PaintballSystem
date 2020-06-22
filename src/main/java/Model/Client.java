@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Client extends Person {
-   // private Rent rent; // asocjacja kwalifikowana
 
     @Id
     @GeneratedValue

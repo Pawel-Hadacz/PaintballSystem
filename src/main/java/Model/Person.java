@@ -2,13 +2,22 @@ package Model;
 
 import Helper.SocialStatus;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Optional;
 
+//@Entity
 public class Person {
+    @Id
     private String PESEL;
+
     private String name;
     private int age;
+    @Enumerated
     private SocialStatus socialStatus; // dziedziczenie wieloaskpetkowe
+
     private Optional<String> identityCard = Optional.empty();
     private Optional<String> permissionSlip = Optional.empty();
     private String gender;

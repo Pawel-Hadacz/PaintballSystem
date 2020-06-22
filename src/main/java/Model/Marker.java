@@ -2,6 +2,7 @@ package Model;
 
 import Helper.Address;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 public class Marker implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,14 +20,17 @@ public class Marker implements Serializable {
     private static double maxWeightInKg = 7; // a
 
     private static List<Marker> markers = new ArrayList<>(); // ekstensja klasy
-
+    @ManyToOne
     private Player player; // asocjacja binarna 1
-
+    @Id
+    @GeneratedValue
+    private Long playerId;
     private String name;
     private double weight;
     private double prize;
     private Address productionPlace; // atrybut złożony - miejsce produkcji
     private String previousName; // atrybut opcjonalny - poprzednia nazwa markera
+    @ElementCollection
     private List<String> availableUpgrades; // atrybut powtarzalny
     private LocalDate reviewData; // termin wygasnięcia przeglądu
     private boolean hasActualReview; // atrybut wyliczalny - sprawdzanie czy przegląd jest akutalny

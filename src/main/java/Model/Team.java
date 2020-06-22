@@ -1,15 +1,21 @@
 package Model;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class Team {
-    
-    private List<Player> players;
+    @Id
+    @GeneratedValue
+    private Long teamId;
     private String name;
     private String colour;
     private int playersLeftInGame;
+    @OneToMany
+    private List<Player> players;
 
 
+    public Team() {
+    }
 
     public Team(String name, String colour) {
         this.name = name;

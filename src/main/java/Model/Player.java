@@ -2,24 +2,38 @@ package Model;
 
 import Helper.Experience;
 import Helper.SocialStatus;
+import org.hibernate.annotations.CollectionType;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Entity
 public class Player extends Person{
-
+    @Id
+    @GeneratedValue
+    private Long playerId;
+    @ManyToOne
     private Team team;
+
+    @JoinTable(name = "match_player")
+    @MapKey(name="name")
     private Map<String,Match> matchQualificator = new HashMap<>();
+    @OneToMany
     private List<Marker> markers = new ArrayList<>(); //asocjacja binarna 1 - *, tutaj *
     private int matchesPlayed;
     private Experience experienceLvl;
+
 
     public Player(String PESEL, String name, int age, SocialStatus socialStatus, String gender, int matchesPlayed, Experience experienceLvl) {
         super(PESEL, name, age, socialStatus, gender);
         this.matchesPlayed = matchesPlayed;
         this.experienceLvl = experienceLvl;
+    }
+
+    public Player() {
     }
 
     public void addMarker(Marker newMarker){ // połączenie zwrotne

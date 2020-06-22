@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
 }
 
 group 'org.example'
@@ -15,3 +17,15 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1100-jdbc4'
     compile "org.hibernate:hibernate-core:5.4.16.Final"
 }
+javafx {
+    version = "12.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'PaintballSystem.main'
+    }
+}
+mainClassName = "$moduleName/Gui.MainApp"
+

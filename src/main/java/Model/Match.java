@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 public abstract class Match { // klasa abstrakcyjna
     private String name;
     private int duration;

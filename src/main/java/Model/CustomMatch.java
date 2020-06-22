@@ -1,6 +1,8 @@
 package Model;
 
+import javax.persistence.Entity;
 import java.util.List;
+
 
 public class CustomMatch extends Match {
 

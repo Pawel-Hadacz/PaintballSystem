@@ -1,18 +1,26 @@
 package Model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class Foul {
+    @Id
+    @GeneratedValue
+    private Long foulId;
     private String name;
-    private int timeofFoul;
+    private int timeOfFoul;
     private String importance;
+    @ManyToOne
     private Match match;
     private static List<Foul> fouls = new ArrayList<>();
 
-    public Foul(Match match,String name, String importance, int timeofFoul)  {
+    public Foul() {
+    }
+
+    public Foul(Match match, String name, String importance, int timeOfFoul)  {
         this.name = name;
-        this.timeofFoul = timeofFoul;
+        this.timeOfFoul = timeOfFoul;
         this.importance = importance;
         this.match = match;
         fouls.add(this);
@@ -42,11 +50,11 @@ public class Foul {
     }
 
     public int getTimeofFoul() {
-        return timeofFoul;
+        return timeOfFoul;
     }
 
     public void setTimeofFoul(int timeofFoul) {
-        this.timeofFoul = timeofFoul;
+        this.timeOfFoul = timeofFoul;
     }
 
     public String getImportance() {
