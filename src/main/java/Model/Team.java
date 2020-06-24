@@ -13,7 +13,6 @@ public class Team {
     @OneToMany
     private List<Player> players;
 
-
     public Team() {
     }
 

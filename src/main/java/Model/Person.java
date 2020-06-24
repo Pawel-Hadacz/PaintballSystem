@@ -1,26 +1,34 @@
 package Model;
 
+
+import Helper.PersonType;
 import Helper.SocialStatus;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Optional;
+import javax.persistence.*;
 
-//@Entity
+import java.util.*;
+
+@Entity
 public class Person {
     @Id
     private String PESEL;
-
     private String name;
     private int age;
     @Enumerated
     private SocialStatus socialStatus; // dziedziczenie wieloaskpetkowe
-
-    private Optional<String> identityCard = Optional.empty();
-    private Optional<String> permissionSlip = Optional.empty();
+    @OneToMany
+    private List<Rent> rents = new ArrayList<>(); // asocjacja z atrubutem
+    private String clientCode; // atrybut klienta
+    private double salary; // atrybut pracownika
+    private String employeeCode; // atrybut pracownika
+    private String identityCard;
+    private String permissionSlip;
     private String gender;
+
+
+
+    @ElementCollection
+    private Set<PersonType> arenaTypes = EnumSet.of(PersonType.PERSON);
 
 
     public Person() {
@@ -33,9 +41,19 @@ public class Person {
         this.socialStatus = socialStatus;
         this.gender = gender;
     }
+    public void addRent(Rent newRent) {
+        if (!rents.contains(newRent)) {
+            rents.add(newRent);
+            newRent.setPerson(this);
+        }
+    }
 
+    public void removeRent(Rent rentToRemove) {
+        if (!rents.contains(rentToRemove)) {
+            rents.remove(rentToRemove);
 
-
+        }
+    }
     public String getPESEL() {
         return PESEL;
     }
@@ -52,19 +70,19 @@ public class Person {
         return gender;
     }
 
-    public Optional<String> getIdentityCard() {
+    public String getIdentityCard() {
         return identityCard;
     }
 
-    public void setIdentityCard(Optional<String> identityCard) {
+    public void setIdentityCard(String identityCard) {
         this.identityCard = identityCard;
     }
 
-    public Optional<String> getPermissionSlip() {
+    public String getPermissionSlip() {
         return permissionSlip;
     }
 
-    public void setPermissionSlip(Optional<String> permissionSlip) {
+    public void setPermissionSlip(String permissionSlip) {
         this.permissionSlip = permissionSlip;
     }
     public boolean buyAlcohol(){
@@ -80,18 +98,47 @@ public class Person {
         }
          return true;
     }
+    public void setPESEL(String PESEL) {
+        this.PESEL = PESEL;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public SocialStatus getSocialStatus() {
+        return socialStatus;
+    }
+
+    public void setSocialStatus(SocialStatus socialStatus) {
+        this.socialStatus = socialStatus;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Set<PersonType> getArenaTypes() {
+        return arenaTypes;
+    }
+
+    public void setArenaTypes(Set<PersonType> arenaTypes) {
+        this.arenaTypes = arenaTypes;
+    }
 
     @Override
     public String toString() {
-        String isPermissionEmpty = permissionSlip.isEmpty() ? "To nie jest dziecko" : getPermissionSlip().get();
-        String isIdentityEmpty = identityCard.isEmpty() ? "To nie jest dorosły" : getIdentityCard().get();
         return "Person{" +
                 "PESEL='" + PESEL + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", socialStatus=" + socialStatus +
-                ", identityCard=" + isIdentityEmpty +
-                ", permissionSlip=" + isPermissionEmpty  +
+                ", identityCard=" +
+                ", permissionSlip=" +
                 ", gender='" + gender + '\'' +
                 '}';
     }

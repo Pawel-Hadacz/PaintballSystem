@@ -153,12 +153,17 @@ public class  Arena { // overlapping) – spłaszczenie hierarchii
     public void setRequiredObstacles(List<String> requiredObstacles) {
         this.requiredObstacles = requiredObstacles;
     }
+
+    public List<Rent> getRents() {
+        return rents;
+    }
+
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
     @Override
     public String toString() {
-        StringBuilder info = new StringBuilder("Arena: " + "\n");
-        for (Rent rent : rents) {
-            info.append("rent: ").append(rent).append("\n");
-        }
-        return info.toString() + arenaTypes;
+        return  name;
     }
 }

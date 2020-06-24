@@ -11,9 +11,9 @@ public class Foul {
     private String name;
     private int timeOfFoul;
     private String importance;
-    @ManyToOne
-    private Match match;
-    private static List<Foul> fouls = new ArrayList<>();
+//    @ManyToOne
+//    private Match match;
+//    private static List<Foul> fouls = new ArrayList<>();
 
     public Foul() {
     }
@@ -22,24 +22,24 @@ public class Foul {
         this.name = name;
         this.timeOfFoul = timeOfFoul;
         this.importance = importance;
-        this.match = match;
-        fouls.add(this);
+//        this.match = match;
+//        fouls.add(this);
 
     }
-    public static Foul createFoul(Match match,String name,String importance,int timeofFoul) throws Exception{
-        if(match == null){
-            throw new Exception("Mecz nie istnieje");
-        }
-        Foul foul = new Foul(match,name, importance,timeofFoul );
-        match.addFoul(foul);
-        return foul;
-    }
-    private static void addFoul(Foul foul){
-        fouls.add(foul);
-    }
-    private static void remoeFoul(Foul foul){
-        fouls.remove(foul);
-    }
+//    public static Foul createFoul(Match match,String name,String importance,int timeofFoul) throws Exception{
+//        if(match == null){
+//            throw new Exception("Mecz nie istnieje");
+//        }
+//        Foul foul = new Foul(match,name, importance,timeofFoul );
+//        match.addFoul(foul);
+//        return foul;
+//    }
+//    private static void addFoul(Foul foul){
+//        fouls.add(foul);
+//    }
+//    private static void remoeFoul(Foul foul){
+//        fouls.remove(foul);
+//    }
 
     public String getName() {
         return name;
@@ -65,19 +65,17 @@ public class Foul {
         this.importance = importance;
     }
 
-    public Match getMatch() {
-        return match;
-    }
-
-    public void setMatch(Match match) {
-        this.match = match;
-    }
+//    public Match getMatch() {
+//        return match;
+//    }
+//
+//    public void setMatch(Match match) {
+//        this.match = match;
+//    }
     @Override
     public String toString() { // przesłonięcie metody toString
         return "Foul{" +
-                "name='" + name + '\'' +
-                "} "+  "\n" +
-                "Match " + match.getName();
+                "name='" + name;
 
     }
 

@@ -1,19 +1,23 @@
 package Model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Match { // klasa abstrakcyjna
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long matchId;
     private String name;
     private int duration;
     private String localization;
     private static List<Match> matches = new ArrayList<>();
-    private List<Foul> fouls = new ArrayList<>();
+  //  private List<Foul> fouls = new ArrayList<>();
     private static Set<Foul> allFouls = new HashSet<>();
-    private List<Player> players = new ArrayList<>(); //Asocjacja kwalifikowana
+    @OneToMany
     private List<Team> teams = new ArrayList<>();
 
 
@@ -64,30 +68,38 @@ public abstract class Match { // klasa abstrakcyjna
         Match.matches = matches;
     }
 
-    public List<Foul> getFouls() {
-        return fouls;
-    }
+//    public List<Foul> getFouls() {
+//        return fouls;
+//    }
 
-    public void setFouls(List<Foul> fouls) {
-        this.fouls = fouls;
-    }
-    public void addFoul(Foul foul) throws Exception {
-        if(!fouls.contains(foul)) {
-            if(allFouls.contains(foul)) {
-                throw new Exception("Ten faul został spowodowany w jakimś meczu");
-            }
-            fouls.add(foul);
-            allFouls.add(foul);
-        }
-    }
+//    public void setFouls(List<Foul> fouls) {
+//        this.fouls = fouls;
+//    }
+//    public void addFoul(Foul foul) throws Exception {
+//        if(!fouls.contains(foul)) {
+//            if(allFouls.contains(foul)) {
+//                throw new Exception("Ten faul został spowodowany w jakimś meczu");
+//            }
+//            fouls.add(foul);
+//            allFouls.add(foul);
+//        }
+//    }
     public String toString() {
         String info = "Match{" +
                 "name='" + name + '\''  + "}" + "\n";
 
-        for(Foul f : fouls){
-            info += " " + f.getName() + "\n";
-        }
+//        for(Foul f : fouls){
+//            info += " " + f.getName() + "\n";
+//        }
         return info;
+    }
+
+    public Long getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(Long matchId) {
+        this.matchId = matchId;
     }
 
     public List<Team> getTeams() {
@@ -109,9 +121,5 @@ public abstract class Match { // klasa abstrakcyjna
         }
     }
 
-    public void addPlayer(Player newPlayer) { //Asocjacja kwalifikowana
-        if(!players.contains(newPlayer)){
-            players.add(newPlayer);
-        }
-    }
+
 }

@@ -12,15 +12,10 @@ import java.util.Map;
 
 @Entity
 public class Player extends Person{
-    @Id
-    @GeneratedValue
-    private Long playerId;
+
     @ManyToOne
     private Team team;
 
-    @JoinTable(name = "match_player")
-    @MapKey(name="name")
-    private Map<String,Match> matchQualificator = new HashMap<>();
     @OneToMany
     private List<Marker> markers = new ArrayList<>(); //asocjacja binarna 1 - *, tutaj *
     private int matchesPlayed;
@@ -47,19 +42,19 @@ public class Player extends Person{
             markers.remove(markerToRemove);
         }
     }
-    public void addMatchQualificator(Match newMatch){ //Asocjacja kwalifikowana
-        if(!matchQualificator.containsKey(newMatch.getName())){
-            matchQualificator.put(newMatch.getName(),newMatch);
-            newMatch.addPlayer(this);
-        }
-    }
-    public Map<String, Match> getMatchQualificator() {
-        return matchQualificator;
-    }
-
-    public void setMatchQualificator(Map<String, Match> matchQualificator) {
-        this.matchQualificator = matchQualificator;
-    }
+//    public void addMatchQualificator(Match newMatch){ //Asocjacja kwalifikowana
+//        if(!matchQualificator.containsKey(newMatch.getName())){
+//            matchQualificator.put(newMatch.getName(),newMatch);
+//            newMatch.addPlayer(this);
+//        }
+//    }
+//    public Map<String, Match> getMatchQualificator() {
+//        return matchQualificator;
+//    }
+//
+//    public void setMatchQualificator(Map<String, Match> matchQualificator) {
+//        this.matchQualificator = matchQualificator;
+//    }
     public Team getTeam() {
         return team;
     }

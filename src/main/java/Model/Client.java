@@ -11,9 +11,7 @@ import java.util.List;
 @Entity
 public class Client extends Person {
 
-    @Id
-    @GeneratedValue
-    private Long clientId;
+
     @OneToMany
     private List<Rent> rents = new ArrayList<>(); // asocjacja z atrubutem
     String clientCode;
@@ -35,18 +33,18 @@ public class Client extends Person {
         this.clientCode = clientCode;
     }
 
-    public void addRent(Rent newRent) {
-        if (!rents.contains(newRent)) {
-            rents.add(newRent);
-            newRent.setClient(this);
-        }
-    }
-
-    public void removeRent(Rent rentToRemove) {
-        if (!rents.contains(rentToRemove)) {
-            rents.remove(rentToRemove);
-        }
-    }
+//    public void addRent(Rent newRent) {
+//        if (!rents.contains(newRent)) {
+//            rents.add(newRent);
+//            newRent.setClient(this);
+//        }
+//    }
+//
+//    public void removeRent(Rent rentToRemove) {
+//        if (!rents.contains(rentToRemove)) {
+//            rents.remove(rentToRemove);
+//        }
+//    }
 
     @Override
     public String toString() {

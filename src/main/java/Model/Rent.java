@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Rent {
-  //  private List<Client> clients = new ArrayList<>(); // asocjacja z atrubutem
+  //  private List<person> persons = new ArrayList<>(); // asocjacja z atrubutem
    // private List<Arena> arenas = new ArrayList<>(); // asocjacja atrubutem
     @ManyToOne
     private Arena arena;
     @ManyToOne
-    private Client client;
+    private Person person;
     @Id
     @GeneratedValue
     private Long rentId;
+    private String name;
     private LocalDate rentStart;
     private LocalDate rentEnd;
     private double cost;
@@ -22,7 +23,53 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(LocalDate rentStart, LocalDate rentEnd) {
+    public Long getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(Long rentId) {
+        this.rentId = rentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
+
+    public LocalDate getRentStart() {
+        return rentStart;
+    }
+
+    public void setRentStart(LocalDate rentStart) {
+        this.rentStart = rentStart;
+    }
+
+    public LocalDate getRentEnd() {
+        return rentEnd;
+    }
+
+    public void setRentEnd(LocalDate rentEnd) {
+        this.rentEnd = rentEnd;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public Rent(String name, LocalDate rentStart, LocalDate rentEnd) {
+        this.name = name;
         this.rentStart = rentStart;
         this.rentEnd = rentEnd;
     }
@@ -39,30 +86,30 @@ public class Rent {
         this.arena = arena;
     }
 
-    public Client getClient() {
-        return client;
+    public Person getPerson() {
+        return person;
     }
-    public void setClient(Client client) {
-        if(this.client!=null){
-            this.client.removeRent(this);
+    public void setPerson(Person person) {
+        if(this.person!=null){
+            this.person.removeRent(this);
        }
-        client.addRent(this);
-        this.client = client;
+        person.addRent(this);
+        this.person = person;
     }
  //   public void setRent(Rent rent) {
 //
 //    }
 
-//    public void addClient(Client newClient) {
-//        if (!clients.contains(newClient)) {
-//            clients.add(newClient);
-//            newClient.setRent(this);
+//    public void addperson(person newperson) {
+//        if (!persons.contains(newperson)) {
+//            persons.add(newperson);
+//            newperson.setRent(this);
 //        }
 //    }
 //
-//    public void removeClient(Client clientToRemove) {
-//        if (clients.contains(clientToRemove)) {
-//            clients.remove(clientToRemove);
+//    public void removeperson(person personToRemove) {
+//        if (persons.contains(personToRemove)) {
+//            persons.remove(personToRemove);
 //        }
 //    }
 //
@@ -86,31 +133,11 @@ public class Rent {
 //        for (Arena arena : arenas) {
 //            info.append("arena: ").append(arena.getName()).append("\n");
 //        }
-//        for (Client client : clients) {
-//            info.append("client: ").append(client.clientCode).append("\n");
+//        for (person person : persons) {
+//            info.append("person: ").append(person.personCode).append("\n");
 //        }
 //        return info.toString();
 //    }
 
-    @Override
-    public String toString() {
-        if(arena==null){
-            return "Rent{" +
-                    "arena= null"  +
-                    ", client=" + client +
-                    '}';
 
-        }else if(client==null)
-            return "Rent{" +
-                    "arena= " +arena  +
-                    ", client==null"  +
-                    '}';
-
-        else {
-            return "Rent{" +
-                    "arena=" + arena.getName()+
-                    ", client=" + client.getName() +
-                    '}';
-        }
-    }
 }

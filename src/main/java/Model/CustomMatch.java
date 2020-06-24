@@ -3,7 +3,7 @@ package Model;
 import javax.persistence.Entity;
 import java.util.List;
 
-
+@Entity
 public class CustomMatch extends Match {
 
     private List<String> rules;

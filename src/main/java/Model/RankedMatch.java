@@ -2,8 +2,10 @@ package Model;
 
 import Helper.Experience;
 
+import javax.persistence.Entity;
 
 
+@Entity
 public class RankedMatch extends Match {
     private Experience levelRequired;
     private int maxAmmunitionAmount;
