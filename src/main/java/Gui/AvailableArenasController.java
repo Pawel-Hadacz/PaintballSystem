@@ -27,29 +27,36 @@ public class AvailableArenasController implements Initializable {
     @FXML
     private ObservableList<Arena> arenasList;
     @FXML
-    private ObservableList<Rent> rents;
+    private ObservableList<List<Rent>> rents;
     @FXML
     private ListView arenaList;
+    @FXML
+    private ListView rentsList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         arenaController.createSampleData();
         arenasList = FXCollections.observableArrayList();
-        rents = FXCollections.observableArrayList();
+
         arenasList.addAll(arenaController.findAllArenasCriteriaQuery());
         arenaList.setItems(arenasList);
+
         //rents.addAll()
         List<Rent> rent = new ArrayList<>();
         Rent r1 = new Rent("Wynajem6", LocalDate.of(2020,1,2),LocalDate.of(2020,1,3));
         rent.add(r1);
-        rents.add(r1);
+       // rents.add(r1);
        // rents.add(arenasList.)
-        arenaList.getSelectionModel().getSelectedItem(SelectionMode.SINGLE);
+        arenaList.getSelectionModel().getSelectedItem();
 
 
-        arenaList.setCellFactory(ComboBoxListCell.forListView(arenasList.get(0).getRents()));
-
-
+        //arenaList.setCellFactory(ComboBoxListCell.forListView(arenasList.get(0).getRents()));
+    }
+    @FXML void handleClickListView(){
+        Arena selectedArena = (Arena) arenaList.getSelectionModel().getSelectedItem();
+        rents = FXCollections.observableArrayList();
+        rents.addAll(selectedArena.getRents());
+        rentsList.setItems(rents);
     }
 }
