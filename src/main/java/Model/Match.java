@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Match { // klasa abstrakcyjna
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -15,12 +15,10 @@ public abstract class Match { // klasa abstrakcyjna
     private int duration;
     private String localization;
     private static List<Match> matches = new ArrayList<>();
-  //  private List<Foul> fouls = new ArrayList<>();
+    private List<Foul> fouls = new ArrayList<>();
     private static Set<Foul> allFouls = new HashSet<>();
     @OneToMany
     private List<Team> teams = new ArrayList<>();
-
-
 
     public Match(String name, int duration, String localization) {
         this.name = name;
@@ -68,30 +66,24 @@ public abstract class Match { // klasa abstrakcyjna
         Match.matches = matches;
     }
 
-//    public List<Foul> getFouls() {
-//        return fouls;
-//    }
+    public List<Foul> getFouls() {
+        return fouls;
+    }
 
-//    public void setFouls(List<Foul> fouls) {
-//        this.fouls = fouls;
-//    }
-//    public void addFoul(Foul foul) throws Exception {
-//        if(!fouls.contains(foul)) {
-//            if(allFouls.contains(foul)) {
-//                throw new Exception("Ten faul został spowodowany w jakimś meczu");
-//            }
-//            fouls.add(foul);
-//            allFouls.add(foul);
-//        }
-//    }
+    public void setFouls(List<Foul> fouls) {
+        this.fouls = fouls;
+    }
+    public void addFoul(Foul foul) throws Exception {
+        if(!fouls.contains(foul)) {
+            if(allFouls.contains(foul)) {
+                throw new Exception("Ten faul został spowodowany w jakimś meczu");
+            }
+            fouls.add(foul);
+            allFouls.add(foul);
+        }
+    }
     public String toString() {
-        String info = "Match{" +
-                "name='" + name + '\''  + "}" + "\n";
-
-//        for(Foul f : fouls){
-//            info += " " + f.getName() + "\n";
-//        }
-        return info;
+        return name;
     }
 
     public Long getMatchId() {

@@ -11,9 +11,9 @@ public class Foul {
     private String name;
     private int timeOfFoul;
     private String importance;
-//    @ManyToOne
-//    private Match match;
-//    private static List<Foul> fouls = new ArrayList<>();
+    //@ManyToOne
+   // private Match match;
+    private static List<Foul> fouls = new ArrayList<>();
 
     public Foul() {
     }

@@ -1,11 +1,15 @@
 package Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class OpenMatch extends Match {
     private int maxDurationTime;
     private int maxPlayerAmount;
+
 
     public OpenMatch(String name, int duration, String localization, int maxPlayerAmount) {
         super(name, duration, localization);
@@ -27,4 +31,5 @@ public class OpenMatch extends Match {
         }
         return false;
     }
+
 }

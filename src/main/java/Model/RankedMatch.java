@@ -3,12 +3,17 @@ package Model;
 import Helper.Experience;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 public class RankedMatch extends Match {
     private Experience levelRequired;
     private int maxAmmunitionAmount;
+    @OneToMany
+    private List<Team> teams = new ArrayList<>();
 
     public RankedMatch(String name, int duration, String localization, Experience levelRequired, int maxAmmunitionAmount) {
         super(name, duration, localization);
@@ -40,5 +45,15 @@ public class RankedMatch extends Match {
             }
         }
         return false;
+    }
+    public void addTeam(Team newTeam){ // połączenie zwrotne
+        if(!teams.contains(newTeam)){
+            teams.add(newTeam);
+        }
+    }
+    public void removeTeam(Team TeamToRemove){
+        if(teams.contains(TeamToRemove)){
+            teams.remove(TeamToRemove);
+        }
     }
 }
