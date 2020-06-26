@@ -27,7 +27,7 @@ public class AvailableArenasController implements Initializable {
     @FXML
     private ObservableList<Arena> arenasList;
     @FXML
-    private ObservableList<List<Rent>> rents;
+    private ObservableList<Rent> rents;
     @FXML
     private ListView arenaList;
     @FXML

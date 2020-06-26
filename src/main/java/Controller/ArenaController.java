@@ -2,10 +2,11 @@ package Controller;
 
 import Config.DatabaseConfig;
 import Helper.Address;
+import Helper.SocialStatus;
 import Model.Arena;
+import Model.Person;
 import Model.Rent;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,6 +18,10 @@ import java.util.List;
 public class ArenaController {
     private Session session = DatabaseConfig.getSession();
     private CriteriaBuilder builder = session.getCriteriaBuilder();
+
+    public void rentArena(){
+
+    }
 
     public void CreateArena(){
 
@@ -47,6 +52,7 @@ public class ArenaController {
         arena.addRent(rent4);
         arena2.addRent(rent5);
         arena2.addRent(rent6);
+        Person p1 = new Person("546546545","Kasia",22, SocialStatus.ADULT,"Kobieta");
 
         session.beginTransaction();
         session.save(arena);
@@ -57,6 +63,7 @@ public class ArenaController {
         session.save(arena2);
         session.save(rent5);
         session.save(rent6);
+        session.save(p1);
         session.getTransaction().commit();
 
     }

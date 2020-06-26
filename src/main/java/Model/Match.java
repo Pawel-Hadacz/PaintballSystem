@@ -20,6 +20,9 @@ public abstract class Match { // klasa abstrakcyjna
     @OneToMany
     private List<Team> teams = new ArrayList<>();
 
+    @ManyToOne
+    private Rent rent;
+
     public Match(String name, int duration, String localization) {
         this.name = name;
         this.duration = duration;

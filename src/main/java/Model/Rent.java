@@ -2,12 +2,11 @@ package Model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class Rent {
-  //  private List<person> persons = new ArrayList<>(); // asocjacja z atrubutem
-   // private List<Arena> arenas = new ArrayList<>(); // asocjacja atrubutem
+
     @ManyToOne
     private Arena arena;
     @ManyToOne
@@ -19,6 +18,7 @@ public class Rent {
     private LocalDate rentStart;
     private LocalDate rentEnd;
     private double cost;
+
 
     public Rent() {
     }
